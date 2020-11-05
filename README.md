@@ -17,8 +17,8 @@ php bin/console app:create-admin-user 'email' 'password'
  php -S localhost:8000 -t public
 
 ## Built with
-- Symfony 4
+- Symfony 5
 - Doctrine
 - Twig
 - Bootstrap
-- Paypal rest-api-sdk
+
