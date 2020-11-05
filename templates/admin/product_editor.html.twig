@@ -1,0 +1,39 @@
+{% extends 'admin/layout.html.twig' %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block admin_content %}
+    <header class="mb-4 d-flex flex-column align-items-start flex-md-row align-items-md-center">
+        <h1>{{ title }}</h1>
+        {% if form.vars.data.id is not empty %}
+            <a href="{{ path('admin_product-delete', {'id': form.vars.data.id }) }}" class="delete-product btn btn-danger ml-md-4">Supprimer</a>
+        {% endif %}
+    </header>
+
+    {{ form_start(form) }}
+        {{ form_row(form.name, {
+            'label': 'Nom',
+        }) }}
+        {{ form_row(form.description, {
+            'label': 'Description',
+        }) }}
+        {{ form_row(form.category, {
+            'label': 'Catégorie',
+        }) }}
+        {{ form_row(form.quantity, {
+            'label': 'Quantity',
+        }) }}
+        {{ form_row(form.price, {
+            'label': 'Prix',
+        }) }}
+       
+
+       
+        </div>
+        <input type="submit" value="Valider" class="btn btn-primary mt-4">
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/productEditor.js"></script>
+{% endblock %}

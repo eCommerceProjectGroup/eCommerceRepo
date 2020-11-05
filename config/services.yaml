@@ -1,0 +1,23 @@
+
+parameters:
+    images_directory: '%kernel.project_dir%/public/img/upload'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      
+        autoconfigure: true 
+        public: false      
+
+    # permet aux classes in src d'être dispo pour être utilisées comme services
+    # création de service par class 
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers  importés separément pour permettre l'injection des services 
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    

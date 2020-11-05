@@ -1,0 +1,84 @@
+index:
+    path: /
+    controller: App\Controller\ProductController::index
+
+product_show:
+    path: /product/{slug}
+    controller: App\Controller\ProductController::show
+    
+admin_index:
+    path: /admin
+    controller: App\Controller\Admin\AdminController::index
+
+all_products:
+    path: /shop/all-products
+    controller: App\Controller\Admin\ProductController::index
+
+admin_product-editor:
+    path: /admin/product-editor/{id}
+    controller: App\Controller\Admin\ProductController::editor
+    defaults: { id: null }
+    requirements:
+        id: '\d+'
+
+admin_product-delete:
+    path: /admin/delete-product/{id}
+    controller: App\Controller\Admin\ProductController::delete
+    requirements:
+        id: '\d+'
+
+admin_order-index:
+    path: /admin/orders
+    controller: App\Controller\Admin\OrderController::index
+
+admin_order-show:
+    path: /admin/order-details/{id}
+    controller: App\Controller\Admin\OrderController::show
+    requirements:
+        id: '\d+'
+
+basket_show:
+    path: /panier
+    controller: App\Controller\PanierController::show
+
+basket_add:
+    path: /panier/add/{id}
+    controller: App\Controller\PanierController::add
+    requirements:
+        id: '\d+'
+
+basket_remove:
+    path: /panier/remove/{id}
+    controller: App\Controller\PanierController::remove
+    requirements:
+        id: '\d+'
+
+basket_update:
+    path: /panier/update
+    controller: App\Controller\PanierController::update
+
+user_welcome:
+    path: /user/welcome
+    controller: App\Controller\UserController::welcome
+
+security_login:
+    path: /internal/login
+    controller: App\Controller\SecurityController::login
+
+security_register:
+    path: /internal/register
+    controller: App\Controller\SecurityController::register
+
+security_logout:
+    path: /user/logout
+
+
+
+
+
+
+
+
+
+
+

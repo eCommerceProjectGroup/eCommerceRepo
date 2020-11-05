@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}E-commerce{% endblock %}</title>
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+        <meta name="description" content="E-commerce">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="/build/app.css">
+        <script src="/build/app.js"></script>
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+    <body class="">
+        <header class="top-header bg-white">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a href="{{ path('index') }}" class="navbar-brand">Accueil</a>
+                <div class="collapse navbar-collapse">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Catégories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('all_products') }}">Produits</a>
+      </li>
+    </ul>
+  </div>
+                
+                <div class="nav-right d-flex mx-2">
+                    <div class="dropdown mr-4">
+                        <i class="far fa-user"></i>
+                        <div class="dropdown-menu">
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <a class="dropdown-item" href="{{ path('security_logout' )}}">Déconnexion</a>
+                            {% else %}
+                                <a href="{{ path('user_welcome') }}" class="dropdown-item">Connexion</a>
+                                <a href="{{ path('user_welcome') }}" class="dropdown-item">Nouveau compte</a>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('admin_index') }}">Administration</a>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+              
+                    <a class="basket-link mx-2" href="{{ path('basket_show') }}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <div class="basket-count d-flex justify-content-center align-items-center">
+                            <span class="text-white">
+                                {{ render(controller('App\\Controller\\PanierController::productCount')) }}
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+        </header>
+        
+        {% if app.request.attributes.get('_route') == 'index' %}
+            <div class="hero"></div>
+        {% endif %}
+        
+        {% block breadcrumb %}{% endblock breadcrumb %}
+
+        {% if app.session.flashbag.peekAll is not empty %}
+            <div class="flash container mt-2" id="flash">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                            <span class="font-weight-bold">{{ message }}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+        <footer class="footer mt-5">
+            <div class="footer__upper py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md">
+                            <ul class="footer__nav p-0">
+                               
+                            </ul>
+                        </div>
+                        <div class="col-12 col-md">
+                            <p>Merci</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-lower bg-white">
+                <div class="container d-flex justify-content-between align-items-center border-top">
+                    <span class="p-4 text-secondary">Copyright © 2020 Lina AOUGBI Saadi DIBOUNE</span>
+                    
+                </div>
+            </div>
+            {% block footer %}{% endblock %}
+        </footer>
+        <script src="/js/flash.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
